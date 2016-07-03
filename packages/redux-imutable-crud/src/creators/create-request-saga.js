@@ -52,13 +52,16 @@ export default function createRequestSaga({ types, method, url, headers, params,
         finalData = data({ payload: watcher.loadEntities.payload, state })
       }
 
-      // Should race here, between waiting for request & location changed
-      const response = yield call(request, finalUrl, {
+      const options = {
         method,
-        headers,
         params: finalParams,
         data: finalData,
-      })
+      }
+
+      if (headers) options.headers = headers;
+
+      // Should race here, between waiting for request & location changed
+      const response = yield call(request, finalUrl, options)
 
       // We return an object in a specific format, see utils/request.js for more information
       if (response.err === undefined || response.err === null) {
