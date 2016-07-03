@@ -1,4 +1,4 @@
-import createQueryConstants from './create-query-constants';
+import createQueryConstants from './create-query-constants'
 
 export default function createEditableConstants(name, options = {}) {
   return {
@@ -27,5 +27,5 @@ export default function createEditableConstants(name, options = {}) {
     SUBMIT_REMOVE_START: `${name}/SUBMIT_REMOVE_START`,
     SUBMIT_REMOVE_SUCCESS: `${name}/SUBMIT_REMOVE_SUCCESS`,
     SUBMIT_REMOVE_FAIL: `${name}/SUBMIT_REMOVE_FAIL`,
-  };
+  }
 }

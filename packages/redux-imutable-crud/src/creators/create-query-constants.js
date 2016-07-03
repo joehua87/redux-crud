@@ -20,5 +20,5 @@ export default function createQueryConstants(name, { keyField } = {}) {
     CLOSE_FILTER_GUIDE: `${name}/CLOSE_FILTER_GUIDE`,
 
     DISMISS_NOTIFICATION: `${name}/DISMISS_NOTIFICATION`,
-  };
+  }
 }

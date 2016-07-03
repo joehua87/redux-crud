@@ -1,5 +1,5 @@
-import { createAction } from 'redux-actions';
-import createQueryConstants from './create-query-constants';
+import { createAction } from 'redux-actions'
+import createQueryConstants from './create-query-constants'
 
 export const defaultInitialState = {
   isLoading: false,
@@ -14,7 +14,7 @@ export const defaultInitialState = {
   filterFields: [],
   isShowFilterGuide: false,
   error: null,
-};
+}
 
 export default function createActions(moduleName) {
   const {
@@ -25,7 +25,7 @@ export default function createActions(moduleName) {
     SHOW_FILTER_GUIDE_START,
     DISMISS_NOTIFICATION,
     CLOSE_FILTER_GUIDE,
-  } = createQueryConstants(moduleName);
+  } = createQueryConstants(moduleName)
 
   return {
     loadEntities: createAction(LOAD_ENTITIES_START),
@@ -35,5 +35,5 @@ export default function createActions(moduleName) {
     showFilterGuide: createAction(SHOW_FILTER_GUIDE_START),
     closeFilterGuide: createAction(CLOSE_FILTER_GUIDE),
     dismissNotification: createAction(DISMISS_NOTIFICATION),
-  };
+  }
 }

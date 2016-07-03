@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import createQueryReducer, { initialState } from './create-query-reducer';
+import createQueryReducer, { initialState } from './create-query-reducer'
 
 export default function createEditableReducer(constants) {
   const {
@@ -12,13 +12,13 @@ export default function createEditableReducer(constants) {
     SUBMIT_ADD_START, SUBMIT_ADD_SUCCESS, SUBMIT_ADD_FAIL,
     REMOVE, CANCEL_REMOVE,
     SUBMIT_REMOVE_START, SUBMIT_REMOVE_SUCCESS, SUBMIT_REMOVE_FAIL,
-  } = constants;
+  } = constants
 
   return (state = initialState, action) => {
     switch (action.type) {
       case CREATE_START:
         return state
-          .set('isSubmittingEdit', true);
+          .set('isSubmittingEdit', true)
       case CREATE_SUCCESS:
         return state
           .set('isSubmittingEdit', false)
@@ -28,7 +28,7 @@ export default function createEditableReducer(constants) {
           .set('notification', {
             message: 'Create Successfully',
             style: 'info',
-          });
+          })
 
       case CREATE_FAIL:
         return state
@@ -36,22 +36,22 @@ export default function createEditableReducer(constants) {
           .set('notification', {
             message: 'Create Fail',
             style: 'error',
-          });
+          })
 
       case EDIT:
         // Use sagas to load detail, so don't need to set selected here
         return state
-          .set('isEdit', true);
+          .set('isEdit', true)
 
       case ADD:
         return state
           .set('isEdit', true)
-          .set('selected', {});
+          .set('selected', {})
 
       case SUBMIT_ADD_START:
       case SUBMIT_EDIT_START:
         return state
-          .set('isSubmittingEdit', true);
+          .set('isSubmittingEdit', true)
 
       case SUBMIT_EDIT_SUCCESS:
         return state
@@ -61,7 +61,7 @@ export default function createEditableReducer(constants) {
             message: 'Save Successfully',
             style: 'info',
           })
-          .mergeIn(['entities', action.payload[keyField]], action.payload);
+          .mergeIn(['entities', action.payload[keyField]], action.payload)
 
       case SUBMIT_EDIT_FAIL:
         return state
@@ -69,7 +69,7 @@ export default function createEditableReducer(constants) {
           .set('notification', {
             message: 'Save Fail',
             style: 'error',
-          });
+          })
 
       case SUBMIT_ADD_SUCCESS:
         return state
@@ -81,7 +81,7 @@ export default function createEditableReducer(constants) {
           .set('notification', {
             message: 'Add Successfully',
             style: 'info',
-          });
+          })
 
       case SUBMIT_ADD_FAIL:
         return state
@@ -90,27 +90,27 @@ export default function createEditableReducer(constants) {
           .set('notification', {
             message: 'Add Fail',
             style: 'error',
-          });
+          })
 
       case CANCEL_ADD:
       case CANCEL_EDIT:
         return state
           .set('isEdit', false)
-          .set('selected', null);
+          .set('selected', null)
 
       case REMOVE:
         return state
           .set('isRemove', true)
-          .set('selected', state.getIn(['entities', action.payload]));
+          .set('selected', state.getIn(['entities', action.payload]))
 
       case CANCEL_REMOVE:
         return state
           .set('isRemove', false)
-          .set('selected', null);
+          .set('selected', null)
 
       case SUBMIT_REMOVE_START:
         return state
-          .set('isSubmittingRemove', true);
+          .set('isSubmittingRemove', true)
 
       case SUBMIT_REMOVE_SUCCESS:
         return state
@@ -122,7 +122,7 @@ export default function createEditableReducer(constants) {
             message: 'Remove Successfully',
             style: 'info',
           })
-          .set('selected', null);
+          .set('selected', null)
 
       case SUBMIT_REMOVE_FAIL:
         return state
@@ -132,10 +132,10 @@ export default function createEditableReducer(constants) {
           .set('notification', {
             message: 'Remove Fail',
             style: 'error',
-          });
+          })
 
       default:
-        return createQueryReducer(constants)(state, action);
+        return createQueryReducer(constants)(state, action)
     }
-  };
+  }
 }

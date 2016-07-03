@@ -1,4 +1,4 @@
-import createRequestSaga from './create-request-saga';
+import createRequestSaga from './create-request-saga'
 
 export default function createQuerySaga({
   constants,
@@ -20,7 +20,7 @@ export default function createQuerySaga({
     SHOW_FILTER_GUIDE_START,
     SHOW_FILTER_GUIDE_SUCCESS,
     SHOW_FILTER_GUIDE_FAIL,
-  } = constants;
+  } = constants
 
   const loadEntitiesSaga = createRequestSaga({
     types: [LOAD_ENTITIES_START, LOAD_ENTITIES_SUCCESS, LOAD_ENTITIES_FAIL],
@@ -32,7 +32,7 @@ export default function createQuerySaga({
       },
       projection: listProjection,
     }),
-  });
+  })
 
   const loadMoreSaga = createRequestSaga({
     types: [LOAD_MORE_START, LOAD_MORE_SUCCESS, LOAD_MORE_FAIL],
@@ -46,7 +46,7 @@ export default function createQuerySaga({
       sort,
       projection,
     }),
-  });
+  })
 
   const loadDetailSaga = createRequestSaga({
     types: [LOAD_DETAIL_START, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
@@ -55,13 +55,13 @@ export default function createQuerySaga({
     params: {
       projection: detailProjection,
     },
-  });
+  })
 
   const showFilterGuideSaga = createRequestSaga({
     types: [SHOW_FILTER_GUIDE_START, SHOW_FILTER_GUIDE_SUCCESS, SHOW_FILTER_GUIDE_FAIL],
     method: 'get',
     url: `${endpoint}/get-config`,
-  });
+  })
 
   // Return object for easier testing each function
   return {
@@ -75,5 +75,5 @@ export default function createQuerySaga({
       loadDetailSaga,
       showFilterGuideSaga,
     ],
-  };
+  }
 }

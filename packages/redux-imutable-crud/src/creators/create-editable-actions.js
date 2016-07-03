@@ -1,6 +1,6 @@
-import { createAction } from 'redux-actions';
-import createEditableConstants from './create-editable-constants';
-import createQueryActions from './create-query-actions';
+import { createAction } from 'redux-actions'
+import createEditableConstants from './create-editable-constants'
+import createQueryActions from './create-query-actions'
 
 export default function createEditableActions(moduleName) {
   const {
@@ -11,9 +11,9 @@ export default function createEditableActions(moduleName) {
     SUBMIT_ADD_START,
     REMOVE, CANCEL_REMOVE,
     SUBMIT_REMOVE_START,
-  } = createEditableConstants(moduleName);
+  } = createEditableConstants(moduleName)
 
-  const queryActions = createQueryActions(moduleName);
+  const queryActions = createQueryActions(moduleName)
 
   return {
     ...queryActions,
@@ -29,5 +29,5 @@ export default function createEditableActions(moduleName) {
     remove: createAction(REMOVE),
     submitRemove: createAction(SUBMIT_REMOVE_START),
     cancelRemove: createAction(CANCEL_REMOVE),
-  };
+  }
 }

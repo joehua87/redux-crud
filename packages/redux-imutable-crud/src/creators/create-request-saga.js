@@ -1,73 +1,72 @@
-import { take, call, put, race, select } from 'redux-saga/effects';
-import { LOCATION_CHANGE } from 'react-router-redux';
-import request from 'utils/request';
-import { createAction } from 'redux-actions';
-
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwic2NvcGVzIjpbInJlYWQiLCJ3cml0ZSJdLCJpYXQiOjE0NTg0Nzg3OTR9.HmLv92mqAmRheYDDmKQScBqYDbkwgxf-RDHrBCs4mxE'; // eslint-disable-line
+import { take, call, put, race, select } from 'redux-saga/effects'
+import { LOCATION_CHANGE } from 'react-router-redux'
+import request from '../utils/request'
+import { createAction } from 'redux-actions'
 
 /**
  *
  * @param types
  * @param method
  * @param url
+ * @param headers
  * @param params
  * @param data
  * @param selectState
  * @returns {Function}
  */
-export default function createRequestSaga({ types, method, url, params, data, selectState }) {
-  return function*() {
-    const [START, SUCCESS, FAIL] = types;
-    const success = createAction(SUCCESS);
-    const fail = createAction(FAIL);
+export default function createRequestSaga({ types, method, url, headers, params, data, selectState }) {
+  return function*() { // eslint-disable-line func-names
+    const [START, SUCCESS, FAIL] = types
+    const success = createAction(SUCCESS)
+    const fail = createAction(FAIL)
 
-    let state = null;
+    let state = null
     if (selectState) {
-      state = yield select((x) => x.toJS());
+      state = yield select((x) => x.toJS())
     }
 
-    while (true) {
+    while (true) { // eslint-disable-line no-constant-condition
       const watcher = yield race({
         loadEntities: take(START),
         stop: take(LOCATION_CHANGE), // stop watching if user leaves page
-      });
+      })
 
-      if (watcher.stop) break;
+      if (watcher.stop) break
 
-      let finalUrl;
+      let finalUrl
       if (typeof url === 'string') {
-        finalUrl = url;
+        finalUrl = url
       } else if (typeof url === 'function') {
-        finalUrl = url({ payload: watcher.loadEntities.payload, state });
+        finalUrl = url({ payload: watcher.loadEntities.payload, state })
       } else {
-        throw new Error('url must be a string or function');
+        throw new Error('url must be a string or function')
       }
 
-      let finalParams;
+      let finalParams
       if (typeof params === 'function') {
-        finalParams = params({ payload: watcher.loadEntities.payload, state });
+        finalParams = params({ payload: watcher.loadEntities.payload, state })
       }
 
-      let finalData;
+      let finalData
       if (typeof data === 'function') {
-        finalData = data({ payload: watcher.loadEntities.payload, state });
+        finalData = data({ payload: watcher.loadEntities.payload, state })
       }
 
       // Should race here, between waiting for request & location changed
       const response = yield call(request, finalUrl, {
         method,
-        headers: { Authorization: `bearer ${token}` }, // TODO Remove up
+        headers,
         params: finalParams,
         data: finalData,
-      });
+      })
 
       // We return an object in a specific format, see utils/request.js for more information
       if (response.err === undefined || response.err === null) {
-        yield put(success(response.data));
+        yield put(success(response.data))
       } else {
-        console.log(response.err.response); // eslint-disable-line no-console
-        yield put(fail(response.err));
+        console.log(response.err.response) // eslint-disable-line no-console
+        yield put(fail(response.err))
       }
     }
-  };
+  }
 }
