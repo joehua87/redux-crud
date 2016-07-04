@@ -14,10 +14,14 @@ let querySagas
 
 const state = {
   query: {
-    q: 'hello',
+    filter: {
+      q: 'hello',
+    },
     page: 1,
   }
 }
+
+// Mock selectState, return initial state with page = 1
 const selectState = () => state
 
 describe('Create Query Sagas', () => {
@@ -72,7 +76,7 @@ describe('loadEntitiesSaga', () => {
     })
 
     it('receive LOAD_ENTITIES_START', () => {
-      next = generator.next({ load: actions.loadEntities({ q: 'hello', sort: 'slug' }) })
+      next = generator.next({ load: actions.loadEntities({ filter: { q: 'hello' }, sort: 'slug' }) })
       const expectedNextCall = call(request, 'http://localhost/post-category/query', requestArgs)
       expect(next.value).to.deep.equal(expectedNextCall)
     })
