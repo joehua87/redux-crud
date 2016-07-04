@@ -27,7 +27,7 @@ export default function createQuerySaga({
     types: [LOAD_ENTITIES_START, LOAD_ENTITIES_SUCCESS, LOAD_ENTITIES_FAIL],
     method: 'get',
     url: `${endpoint}/query`,
-    params: ({ payload: { page, limit, sort, projection, ...filter } }) => omitBy({
+    params: ({ payload: { page, limit, sort, projection, filter } }) => omitBy({
       filter,
       page,
       limit,
@@ -41,7 +41,7 @@ export default function createQuerySaga({
     method: 'get',
     url: `${endpoint}/query`,
     selectState, // Need use state to get current page, limit
-    params: ({ state: { query: { page, limit, sort, projection, ...filter } } }) => omitBy({
+    params: ({ state: { query: { page, limit, sort, projection, filter } } }) => omitBy({
       filter,
       page: page + 1,
       limit,
