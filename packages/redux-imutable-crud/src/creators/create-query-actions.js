@@ -24,6 +24,7 @@ export default function createActions(moduleName) {
     CLOSE_DETAIL,
     SHOW_FILTER_GUIDE_START,
     DISMISS_NOTIFICATION,
+    CHANGE_FILTER_STRING,
     CLOSE_FILTER_GUIDE,
   } = createQueryConstants(moduleName)
 
@@ -34,6 +35,7 @@ export default function createActions(moduleName) {
     closeDetail: createAction(CLOSE_DETAIL),
     showFilterGuide: createAction(SHOW_FILTER_GUIDE_START),
     closeFilterGuide: createAction(CLOSE_FILTER_GUIDE),
+    changeFilterString: createAction(CHANGE_FILTER_STRING),
     dismissNotification: createAction(DISMISS_NOTIFICATION),
   }
 }

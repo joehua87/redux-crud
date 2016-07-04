@@ -34,7 +34,7 @@ const {
   SHOW_FILTER_GUIDE_FAIL,
   CLOSE_FILTER_GUIDE,
 
-  CHANGE_QUERY_STRING,
+  CHANGE_FILTER_STRING,
   DISMISS_NOTIFICATION,
 } = constants
 
@@ -88,7 +88,7 @@ describe('Query Reducer', () => {
   describe('Change filterString', () => {
     it('success', () => {
       let state = fromJS(initialState.toJS())
-      state = reducer(state, { type: CHANGE_QUERY_STRING, payload: 'q=hello' })
+      state = reducer(state, { type: CHANGE_FILTER_STRING, payload: 'q=hello' })
       expect(state.toJS()).to.have.property('filterString', 'q=hello')
     })
   })

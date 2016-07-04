@@ -29,7 +29,7 @@ export default function createReducer(constants) {
     LOAD_DETAIL_START, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL, CLOSE_DETAIL,
     SHOW_FILTER_GUIDE_START, SHOW_FILTER_GUIDE_SUCCESS, SHOW_FILTER_GUIDE_FAIL,
     CLOSE_FILTER_GUIDE,
-    CHANGE_QUERY_STRING,
+    CHANGE_FILTER_STRING,
     DISMISS_NOTIFICATION,
   } = constants
 
@@ -120,7 +120,7 @@ export default function createReducer(constants) {
         return state
           .set('isShowFilterGuide', false)
 
-      case CHANGE_QUERY_STRING:
+      case CHANGE_FILTER_STRING:
         return state
           .set('filterString', action.payload)
 
