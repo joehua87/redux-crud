@@ -58,6 +58,7 @@ const loadMoreArgs = {
 
 const loadDetailArgs = {
   method: 'get',
+  params: {},
 }
 
 describe('loadEntitiesSaga', () => {

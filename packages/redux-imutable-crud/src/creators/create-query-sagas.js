@@ -54,9 +54,9 @@ export default function createQuerySaga({
     types: [LOAD_DETAIL_START, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
     method: 'get',
     url: ({ payload }) => `${endpoint}/id/${payload}`,
-    params: {
+    params: omitBy({
       projection: detailProjection,
-    },
+    }, (prop) => !prop),
   })
 
   const showFilterGuideSaga = createRequestSaga({

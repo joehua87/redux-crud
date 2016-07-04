@@ -41,21 +41,17 @@ export default function createRequestSaga({ types, method, url, headers, params,
 
       const payload = watcher.load && watcher.load.payload
 
-      let finalUrl
-      if (typeof url === 'string') {
-        finalUrl = url
-      } else if (typeof url === 'function') {
+      let finalUrl = url
+      if (typeof url === 'function') {
         finalUrl = url({ payload, state })
-      } else {
-        throw new Error('url must be a string or function')
       }
 
-      let finalParams
+      let finalParams = params
       if (typeof params === 'function') {
         finalParams = params({ payload, state })
       }
 
-      let finalData
+      let finalData = data
       if (typeof data === 'function') {
         finalData = data({ payload, state })
       }
