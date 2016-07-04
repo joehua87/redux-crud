@@ -1,7 +1,5 @@
-import { take, put } from 'redux-saga/effects'
 import createRequestSaga from './create-request-saga'
 import createQuerySagas from './create-query-sagas'
-import createQueryActions from './create-query-actions'
 
 export default function createEditableSaga({
   constants,
@@ -20,15 +18,10 @@ export default function createEditableSaga({
     SUBMIT_EDIT_START,
     SUBMIT_EDIT_SUCCESS,
     SUBMIT_EDIT_FAIL,
-    EDIT,
     SUBMIT_REMOVE_START,
     SUBMIT_REMOVE_SUCCESS,
     SUBMIT_REMOVE_FAIL,
   } = constants
-
-  const {
-    loadDetail,
-  } = createQueryActions(constants)
 
   const querySagas = createQuerySagas({
     constants,
@@ -65,27 +58,18 @@ export default function createEditableSaga({
     url: ({ payload }) => `${endpoint}/delete/${payload}`,
   })
 
-  function* editSaga() {
-    while (true) { // eslint-disable-line no-constant-condition
-      const editAction = yield take(EDIT)
-      yield put(loadDetail(editAction.payload))
-    }
-  }
-
   // Return object for easier testing each function
   return {
     submitAddSaga,
     submitEditSaga,
     submitRemoveSaga,
     createSaga,
-    editSaga,
     list: [
       ...querySagas.list,
       submitAddSaga,
       submitEditSaga,
       submitRemoveSaga,
       createSaga,
-      editSaga,
     ],
   }
 }

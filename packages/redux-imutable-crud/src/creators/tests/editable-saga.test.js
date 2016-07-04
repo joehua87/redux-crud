@@ -13,7 +13,6 @@ describe('Create Editable Sagas', () => {
     expect(editableSagas).to.have.property('submitEditSaga')
     expect(editableSagas).to.have.property('submitRemoveSaga')
     expect(editableSagas).to.have.property('createSaga')
-    expect(editableSagas).to.have.property('editSaga')
     expect(editableSagas).to.have.property('list')
   })
 })
@@ -31,9 +30,5 @@ describe('submitRemoveSaga', () => {
 })
 
 describe('createSaga', () => {
-
-})
-
-describe('editSaga', () => {
 
 })
