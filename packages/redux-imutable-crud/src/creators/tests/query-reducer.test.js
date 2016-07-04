@@ -85,11 +85,11 @@ describe('Query Reducer', () => {
     })
   })
 
-  describe('Change queryString', () => {
+  describe('Change filterString', () => {
     it('success', () => {
       let state = fromJS(initialState.toJS())
       state = reducer(state, { type: CHANGE_QUERY_STRING, payload: 'q=hello' })
-      expect(state.toJS()).to.have.property('queryString', 'q=hello')
+      expect(state.toJS()).to.have.property('filterString', 'q=hello')
     })
   })
 

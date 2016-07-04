@@ -20,7 +20,7 @@ export default function createQueryConstants(name, { keyField } = {}) {
     SHOW_FILTER_GUIDE_FAIL: `${name}/SHOW_FILTER_GUIDE_FAIL`,
     CLOSE_FILTER_GUIDE: `${name}/CLOSE_FILTER_GUIDE`,
 
-    CHANGE_QUERY_STRING: `${name}/CHANGE_QUERY_STRING`,
+    CHANGE_FILTER_STRING: `${name}/CHANGE_FILTER_STRING`,
     DISMISS_NOTIFICATION: `${name}/DISMISS_NOTIFICATION`,
   }
 }

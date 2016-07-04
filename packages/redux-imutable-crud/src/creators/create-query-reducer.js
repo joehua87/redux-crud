@@ -8,7 +8,7 @@ export const initialState = fromJS({
   isEdit: false,
   isRemove: false,
   entities: fromJS({}),
-  queryString: '',
+  filterString: '',
   query: {
     count: 0,
     page: 1,
@@ -47,7 +47,7 @@ export default function createReducer(constants) {
           .set('isLoading', false)
           .set('entities', fromJS(entitiesMap))
           .set('query', query)
-          .set('hasMore', query.count > (query.page + 1) * query.limit)
+          .set('hasMore', query.count > (query.page) * query.limit)
           .set('error', null)
 
       case LOAD_ENTITIES_FAIL:
@@ -65,7 +65,7 @@ export default function createReducer(constants) {
           .set('isLoadingMore', false)
           .mergeIn(['entities'], entitiesMap)
           .set('query', query)
-          .set('hasMore', query.count > (query.page + 1) * query.limit)
+          .set('hasMore', query.count > (query.page) * query.limit)
           .set('error', null)
 
       case LOAD_MORE_FAIL:
@@ -122,7 +122,7 @@ export default function createReducer(constants) {
 
       case CHANGE_QUERY_STRING:
         return state
-          .set('queryString', action.payload)
+          .set('filterString', action.payload)
 
       case DISMISS_NOTIFICATION:
         return state
