@@ -1,6 +1,7 @@
 export default function createQueryConstants(name, { keyField } = {}) {
   return {
     keyField: keyField || '_id',
+
     LOAD_ENTITIES_START: `${name}/LOAD_ENTITIES_START`,
     LOAD_ENTITIES_SUCCESS: `${name}/LOAD_ENTITIES_SUCCESS`,
     LOAD_ENTITIES_FAIL: `${name}/LOAD_ENTITIES_FAIL`,
@@ -19,6 +20,7 @@ export default function createQueryConstants(name, { keyField } = {}) {
     SHOW_FILTER_GUIDE_FAIL: `${name}/SHOW_FILTER_GUIDE_FAIL`,
     CLOSE_FILTER_GUIDE: `${name}/CLOSE_FILTER_GUIDE`,
 
+    CHANGE_QUERY_STRING: `${name}/CHANGE_QUERY_STRING`,
     DISMISS_NOTIFICATION: `${name}/DISMISS_NOTIFICATION`,
   }
 }

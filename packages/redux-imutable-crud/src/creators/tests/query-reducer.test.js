@@ -34,12 +34,13 @@ const {
   SHOW_FILTER_GUIDE_FAIL,
   CLOSE_FILTER_GUIDE,
 
+  CHANGE_QUERY_STRING,
   DISMISS_NOTIFICATION,
 } = constants
 
 describe('Query Reducer', () => {
   describe('Show / hide filter guide success', () => {
-    let state = fromJS(initialState.toJS())
+    let state = fromJS(initialState.toJS())     // Force create new state
 
     it('start', () => {
       state = reducer(state, { type: SHOW_FILTER_GUIDE_START })
@@ -81,6 +82,14 @@ describe('Query Reducer', () => {
       expect(state.toJS()).to.have.property('isShowFilterGuide', false)
       expect(state.toJS()).to.have.property('filterFields').to.deep.equal([])
       expect(state.toJS().error).to.deep.equal(error)
+    })
+  })
+
+  describe('Change queryString', () => {
+    it('success', () => {
+      let state = fromJS(initialState.toJS())
+      state = reducer(state, { type: CHANGE_QUERY_STRING, payload: 'q=hello' })
+      expect(state.toJS()).to.have.property('queryString', 'q=hello')
     })
   })
 

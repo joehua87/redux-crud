@@ -8,6 +8,7 @@ export const initialState = fromJS({
   isEdit: false,
   isRemove: false,
   entities: fromJS({}),
+  queryString: '',
   query: {
     count: 0,
     page: 1,
@@ -28,6 +29,7 @@ export default function createReducer(constants) {
     LOAD_DETAIL_START, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL, CLOSE_DETAIL,
     SHOW_FILTER_GUIDE_START, SHOW_FILTER_GUIDE_SUCCESS, SHOW_FILTER_GUIDE_FAIL,
     CLOSE_FILTER_GUIDE,
+    CHANGE_QUERY_STRING,
     DISMISS_NOTIFICATION,
   } = constants
 
@@ -117,6 +119,10 @@ export default function createReducer(constants) {
       case CLOSE_FILTER_GUIDE:
         return state
           .set('isShowFilterGuide', false)
+
+      case CHANGE_QUERY_STRING:
+        return state
+          .set('queryString', action.payload)
 
       case DISMISS_NOTIFICATION:
         return state
