@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import { PropTypes } from 'react'
 
 export const queryListPropTypes = {
   entities: PropTypes.object.isRequired,
@@ -11,7 +11,7 @@ export const queryListPropTypes = {
   isLoading: PropTypes.bool.isRequired,
   isShowDetail: PropTypes.bool.isRequired,
   isShowFilterGuide: PropTypes.bool.isRequired,
-};
+}
 
 export const editableListPropTypes = {
   ...queryListPropTypes,
@@ -21,4 +21,4 @@ export const editableListPropTypes = {
   submitEdit: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
   submitRemove: PropTypes.func.isRequired,
-};
+}
