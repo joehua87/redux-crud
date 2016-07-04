@@ -1,6 +1,6 @@
 import { take, call, put, race, select } from 'redux-saga/effects'
 import omitBy from 'lodash/omitBy'
-import { LOCATION_CHANGE } from 'react-router-redux'
+// import { LOCATION_CHANGE } from 'react-router-redux'
 import request from '../utils/request'
 import { createAction } from 'redux-actions'
 
@@ -26,7 +26,7 @@ export default function createRequestSaga({ types, method, url, headers, params,
     while (true) { // eslint-disable-line no-constant-condition
       const watcher = yield race({
         load: take(START),
-        stop: take(LOCATION_CHANGE), // stop watching if user leaves page
+        // stop: take(LOCATION_CHANGE), // stop watching if user leaves page
       })
 
       debug('Race Watcher', watcher)

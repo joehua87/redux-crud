@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions'
 import createQueryConstants from '../create-query-constants'
 import createQueryActions from '../create-query-actions'
 import createQuerySagas from '../create-query-sagas'
-import { LOCATION_CHANGE } from 'react-router-redux'
+// import { LOCATION_CHANGE } from 'react-router-redux'
 import { race, take, call, put, select } from 'redux-saga/effects'
 import request from '../../utils/request'
 
@@ -71,7 +71,7 @@ describe('loadEntitiesSaga', () => {
       next = generator.next()
       const expectedNextCall = race({
         load: take(constants.LOAD_ENTITIES_START),
-        stop: take(LOCATION_CHANGE),
+        // stop: take(LOCATION_CHANGE),
       })
       expect(next.value).to.deep.equal(expectedNextCall)
     })
@@ -121,7 +121,7 @@ describe('loadMoreSaga', () => {
 
       const expectedRace = race({
         load: take(constants.LOAD_MORE_START),
-        stop: take(LOCATION_CHANGE),
+        // stop: take(LOCATION_CHANGE),
       })
 
       expect(next.value).to.deep.equal(expectedRace)
@@ -178,7 +178,7 @@ describe('loadDetailSaga', () => {
 
       const expectedRace = race({
         load: take(constants.LOAD_DETAIL_START),
-        stop: take(LOCATION_CHANGE),
+        // stop: take(LOCATION_CHANGE),
       })
 
       expect(next.value).to.deep.equal(expectedRace)
