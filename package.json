@@ -9,6 +9,7 @@
   "devDependencies": {
     "babel-eslint": "^6.0.4",
     "cross-env": "^1.0.8",
+    "debug": "^2.2.0",
     "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-babel": "^3.2.0",
@@ -17,5 +18,8 @@
     "eslint-plugin-mocha": "^3.0.0",
     "eslint-plugin-react": "^5.1.1",
     "lerna": "^2.0.0-beta.23"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
   }
 }

@@ -1,3 +1,4 @@
+import omitBy from 'lodash/omitBy'
 import createRequestSaga from './create-request-saga'
 
 export default function createQuerySaga({
@@ -26,12 +27,13 @@ export default function createQuerySaga({
     types: [LOAD_ENTITIES_START, LOAD_ENTITIES_SUCCESS, LOAD_ENTITIES_FAIL],
     method: 'get',
     url: `${endpoint}/query`,
-    params: ({ payload }) => ({
-      filter: {
-        ...payload,
-      },
-      projection: listProjection,
-    }),
+    params: ({ payload: { page, limit, sort, projection, ...filter } }) => omitBy({
+      filter,
+      page,
+      limit,
+      sort,
+      projection: projection || listProjection, // prefer params passed from container
+    }, (prop) => !prop), // Keep only has value props
   })
 
   const loadMoreSaga = createRequestSaga({
@@ -39,13 +41,13 @@ export default function createQuerySaga({
     method: 'get',
     url: `${endpoint}/query`,
     selectState, // Need use state to get current page, limit
-    params: ({ payload: { filter, page, limit, sort, projection } }) => ({
+    params: ({ state: { query: { page, limit, sort, projection, ...filter } } }) => omitBy({
       filter,
-      page,
+      page: page + 1,
       limit,
       sort,
       projection,
-    }),
+    }, (prop) => !prop), // Keep only has value props
   })
 
   const loadDetailSaga = createRequestSaga({

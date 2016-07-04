@@ -1,9 +1,9 @@
 import { take, put } from 'redux-saga/effects'
 import createRequestSaga from './create-request-saga'
 import createQuerySagas from './create-query-sagas'
+import createQueryActions from './create-query-actions'
 
 export default function createEditableSaga({
-  actions,
   constants,
   endpoint,
   selectState,
@@ -28,10 +28,9 @@ export default function createEditableSaga({
 
   const {
     loadDetail,
-  } = actions
+  } = createQueryActions(constants)
 
   const querySagas = createQuerySagas({
-    actions,
     constants,
     endpoint,
     selectState,
