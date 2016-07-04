@@ -59,7 +59,7 @@ describe('Editable Reducer', () => {
         expect(state.toJS()).to.have.property('isSubmittingEdit', false)
 
         expect(Object.keys(state.toJS().entities)).to.have.property('length', 11)
-        expect(state.toJS().query).to.have.property('count', 15) // increase count
+        expect(state.toJS()).to.have.property('count', 15) // increase count
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Add Successfully')
@@ -121,7 +121,7 @@ describe('Editable Reducer', () => {
         expect(state.toJS().notification).to.have.property('style', 'info')
 
         expect(Object.keys(state.toJS().entities)).to.have.property('length', 11)
-        expect(state.toJS().query).to.have.property('count', 15) // increase count
+        expect(state.toJS()).to.have.property('count', 15) // increase count
       })
     })
 
@@ -252,7 +252,7 @@ describe('Editable Reducer', () => {
         expect(state.toJS().notification).to.have.property('style', 'info')
 
         expect(Object.keys(state.toJS().entities)).to.have.property('length', 9)
-        expect(state.toJS().query).to.have.property('count', 13) // decrease count
+        expect(state.toJS()).to.have.property('count', 13) // decrease count
       })
     })
 

@@ -105,7 +105,7 @@ describe('Query Reducer', () => {
       expect(state.toJS()).to.have.property('isLoading', false)
       expect(state.toJS()).to.have.property('error', null)
 
-      expect(state.toJS().query).to.have.property('count')
+      expect(state.toJS()).to.have.property('count')
       expect(state.toJS().query).to.have.property('page', 1)
       expect(state.toJS().query).to.have.property('limit', 10)
       expect(Object.keys(state.toJS().entities)).to.have.property('length', 10)
@@ -159,7 +159,7 @@ describe('Query Reducer', () => {
       expect(state.toJS()).to.have.property('error', null)
 
       expect(state.toJS()).to.have.property('query')
-      expect(state.toJS().query).to.have.property('count')
+      expect(state.toJS()).to.have.property('count')
       expect(state.toJS().query).to.have.property('page', 2)
       expect(state.toJS().query).to.have.property('limit', 10)
       expect(Object.keys(state.toJS().entities)).to.have.property('length', 14)

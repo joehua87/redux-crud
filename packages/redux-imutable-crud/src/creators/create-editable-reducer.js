@@ -23,7 +23,7 @@ export default function createEditableReducer(constants) {
         return state
           .set('isSubmittingEdit', false)
           .set('selected', action.payload)
-          .set('query', { ...state.get('query'), count: state.get('query').count + 1 })
+          .update('count', (count) => count + 1)
           .mergeIn(['entities'], { [action.payload[keyField]]: action.payload })
           .set('notification', {
             message: 'Create Successfully',
@@ -76,7 +76,7 @@ export default function createEditableReducer(constants) {
           .set('isSubmittingEdit', false)
           .set('isEdit', false)
           .set('selected', action.payload)
-          .set('query', { ...state.get('query'), count: state.get('query').count + 1 })
+          .update('count', (count) => count + 1)
           .mergeIn(['entities'], { [action.payload[keyField]]: action.payload })
           .set('notification', {
             message: 'Add Successfully',
@@ -116,7 +116,7 @@ export default function createEditableReducer(constants) {
         return state
           .set('isRemove', false)
           .set('isSubmittingRemove', false)
-          .set('query', { ...state.get('query'), count: state.get('query').count - 1 })
+          .update('count', (count) => count - 1)
           .deleteIn(['entities', action.payload[keyField]])
           .set('notification', {
             message: 'Remove Successfully',

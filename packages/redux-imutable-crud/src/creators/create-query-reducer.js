@@ -10,9 +10,9 @@ export const initialState = fromJS({
   entities: fromJS({}),
   filterString: '',
   query: {
-    count: 0,
-    page: 1,
+    page: 0,
   },
+  count: 0,
   hasMore: false,
   selected: null,
   isShowDetail: false,
@@ -34,7 +34,7 @@ export default function createReducer(constants) {
   } = constants
 
   return (state = initialState, action = {}) => {
-    const { entities, ...query } = action.payload || {}
+    const { entities, count, ...query } = action.payload || {}
     const entitiesMap = entities && entities.reduce((acc, value) => ({ ...acc, [value[keyField]]: value }), {})
 
     switch (action.type) {
@@ -47,7 +47,8 @@ export default function createReducer(constants) {
           .set('isLoading', false)
           .set('entities', fromJS(entitiesMap))
           .set('query', query)
-          .set('hasMore', query.count > (query.page) * query.limit)
+          .set('count', count)
+          .set('hasMore', count > (query.page) * query.limit)
           .set('error', null)
 
       case LOAD_ENTITIES_FAIL:
@@ -65,7 +66,7 @@ export default function createReducer(constants) {
           .set('isLoadingMore', false)
           .mergeIn(['entities'], entitiesMap)
           .set('query', query)
-          .set('hasMore', query.count > (query.page) * query.limit)
+          .set('hasMore', count > (query.page) * query.limit)
           .set('error', null)
 
       case LOAD_MORE_FAIL:
