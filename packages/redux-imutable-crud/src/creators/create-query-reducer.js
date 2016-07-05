@@ -1,4 +1,6 @@
-import { fromJS } from 'immutable'
+/* eslint-disable new-cap */
+
+import { fromJS, OrderedMap } from 'immutable'
 
 export const initialState = fromJS({
   isLoading: false,
@@ -7,7 +9,7 @@ export const initialState = fromJS({
   isLoadingMore: false,
   isEdit: false,
   isRemove: false,
-  entities: fromJS({}),
+  entities: OrderedMap({}),
   filterString: '',
   query: {
     page: 0,
@@ -45,7 +47,7 @@ export default function createReducer(constants) {
       case LOAD_ENTITIES_SUCCESS:
         return state
           .set('isLoading', false)
-          .set('entities', fromJS(entitiesMap))
+          .set('entities', OrderedMap(entitiesMap))
           .set('query', query)
           .set('count', count)
           .set('hasMore', count > (query.page) * query.limit)

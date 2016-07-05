@@ -2,6 +2,7 @@ import { fromJS } from 'immutable'
 import createQueryConstants from '../create-query-constants'
 import createQueryReducer, { initialState } from '../create-query-reducer.js'
 import chai from 'chai'
+import reduce from 'lodash/reduce'
 import data from './test-data/categories.json'
 import dataMore from './test-data/categories-more.json'
 import filterGuide from './test-data/filter-guide.json'
@@ -163,6 +164,12 @@ describe('Query Reducer', () => {
       expect(state.toJS().query).to.have.property('page', 2)
       expect(state.toJS().query).to.have.property('limit', 10)
       expect(Object.keys(state.toJS().entities)).to.have.property('length', 14)
+    })
+
+    it('keep ordered', () => {
+      const expectEntities = [...data.entities, ...dataMore.entities]
+      const entities = reduce(state.toJS().entities, (acc, value) => [...acc, value], [])
+      expect(entities).to.deep.equal(expectEntities)
     })
   })
 
