@@ -1,0 +1,41 @@
+export type FilterItem = {
+  filterField: string,
+  compareType: string,
+  dbType: any,
+}
+
+export type ReduxAction = {
+  type?: string,
+  payload?: any,
+}
+
+export type NotificationType = 'info' | 'error' | 'warning'
+
+export type Notification = {
+  type: NotificationType,
+  message: string,
+}
+
+export interface CrudState<T> {
+  isLoading: boolean,
+  isLoadingFilterGuide: boolean,
+  isLoadingDetail: boolean,
+  isLoadingMore: boolean,
+  entities: { [key: string]: T } | {},
+  result: Array<string>,
+  count: number,
+  query: {
+    page: number,
+  },
+  selected: T,
+  isShowDetail: boolean,
+  isEdit?: boolean,
+  isRemove?: boolean,
+  isShowDetail: boolean,
+  isSubmittingEdit?: boolean,
+  isSubmittingRemove?: boolean,
+  filterFields: Array<FilterItem>,
+  isShowFilterGuide: boolean,
+  error: any,
+  notification: Notification,
+}

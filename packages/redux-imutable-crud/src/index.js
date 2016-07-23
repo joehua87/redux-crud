@@ -1,4 +1,4 @@
-export { initialState } from './creators/create-query-reducer'
+export { rawInitialState, initialState } from './creators/initial-state'
 export createQueryConstants from './creators/create-query-constants'
 export createEditableConstants from './creators/create-editable-constants'
 export createQueryActions from './creators/create-query-actions'

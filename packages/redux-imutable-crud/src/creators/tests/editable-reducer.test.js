@@ -1,7 +1,10 @@
-import { fromJS } from 'immutable'
+/* eslint-disable new-cap */
+// @flow
+
+import { Record } from 'immutable'
 import createEditableConstants from '../create-editable-constants'
 import createEditableReducer from '../create-editable-reducer.js'
-import { initialState } from '../create-query-reducer.js'
+import { rawInitialState } from '../initial-state.js'
 import { expect } from 'chai'
 import data from './test-data/categories.json'
 import { loadEntities } from './helpers'
@@ -25,12 +28,14 @@ const {
   SUBMIT_REMOVE_START, SUBMIT_REMOVE_SUCCESS, SUBMIT_REMOVE_FAIL,
 } = constants
 
+const CrudRecord = Record(rawInitialState)
+
 describe('Editable Reducer', () => {
   describe('Add', () => {
     let state
 
     beforeEach(() => {
-      state = fromJS(initialState.toJS())
+      state = CrudRecord(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -63,7 +68,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Add Successfully')
-        expect(state.toJS().notification).to.have.property('style', 'info')
+        expect(state.toJS().notification).to.have.property('type', 'info')
       })
     })
 
@@ -88,7 +93,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Add Fail')
-        expect(state.toJS().notification).to.have.property('style', 'error')
+        expect(state.toJS().notification).to.have.property('type', 'error')
       })
     })
   })
@@ -97,7 +102,7 @@ describe('Editable Reducer', () => {
     let state
 
     beforeEach(() => {
-      state = fromJS(initialState.toJS())
+      state = CrudRecord(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -118,7 +123,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Create Successfully')
-        expect(state.toJS().notification).to.have.property('style', 'info')
+        expect(state.toJS().notification).to.have.property('type', 'info')
 
         expect(Object.keys(state.toJS().entities)).to.have.property('length', 11)
         expect(state.toJS()).to.have.property('count', 15) // increase count
@@ -135,7 +140,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Create Fail')
-        expect(state.toJS().notification).to.have.property('style', 'error')
+        expect(state.toJS().notification).to.have.property('type', 'error')
       })
     })
   })
@@ -143,7 +148,7 @@ describe('Editable Reducer', () => {
   describe('Edit', () => {
     let state
     beforeEach(() => {
-      state = fromJS(initialState.toJS())
+      state = CrudRecord(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -174,7 +179,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Save Successfully')
-        expect(state.toJS().notification).to.have.property('style', 'info')
+        expect(state.toJS().notification).to.have.property('type', 'info')
       })
     })
 
@@ -200,7 +205,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Save Fail')
-        expect(state.toJS().notification).to.have.property('style', 'error')
+        expect(state.toJS().notification).to.have.property('type', 'error')
       })
     })
   })
@@ -208,7 +213,7 @@ describe('Editable Reducer', () => {
   describe('Remove', () => {
     let state
     beforeEach(() => {
-      state = fromJS(initialState.toJS())
+      state = CrudRecord(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -249,7 +254,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Remove Successfully')
-        expect(state.toJS().notification).to.have.property('style', 'info')
+        expect(state.toJS().notification).to.have.property('type', 'info')
 
         expect(Object.keys(state.toJS().entities)).to.have.property('length', 9)
         expect(state.toJS()).to.have.property('count', 13) // decrease count
@@ -268,7 +273,7 @@ describe('Editable Reducer', () => {
 
         expect(state.toJS()).to.have.property('notification')
         expect(state.toJS().notification).to.have.property('message', 'Remove Fail')
-        expect(state.toJS().notification).to.have.property('style', 'error')
+        expect(state.toJS().notification).to.have.property('type', 'error')
       })
     })
   })

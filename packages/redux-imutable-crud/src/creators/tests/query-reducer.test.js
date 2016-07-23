@@ -1,7 +1,11 @@
-import { fromJS } from 'immutable'
-import createQueryConstants from '../create-query-constants'
-import createQueryReducer, { initialState } from '../create-query-reducer.js'
+/* eslint-disable new-cap */
+// @flow
+
+import { Record } from 'immutable'
 import chai from 'chai'
+import createQueryConstants from '../create-query-constants'
+import createQueryReducer from '../create-query-reducer.js'
+import { rawInitialState } from '../initial-state.js'
 import reduce from 'lodash/reduce'
 import data from './test-data/categories.json'
 import dataMore from './test-data/categories-more.json'
@@ -39,9 +43,11 @@ const {
   DISMISS_NOTIFICATION,
 } = constants
 
+const CrudRecord = Record(rawInitialState)
+
 describe('Query Reducer', () => {
   describe('Show / hide filter guide success', () => {
-    let state = fromJS(initialState.toJS())     // Force create new state
+    let state = CrudRecord(rawInitialState)     // Force create new state
 
     it('start', () => {
       state = reducer(state, { type: SHOW_FILTER_GUIDE_START })
@@ -69,7 +75,7 @@ describe('Query Reducer', () => {
   })
 
   describe('Show filter guide fail', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
 
     it('start', () => {
       state = reducer(state, { type: SHOW_FILTER_GUIDE_START })
@@ -88,14 +94,14 @@ describe('Query Reducer', () => {
 
   describe('Change filterString', () => {
     it('success', () => {
-      let state = fromJS(initialState.toJS())
+      let state = CrudRecord(rawInitialState)
       state = reducer(state, { type: CHANGE_FILTER_STRING, payload: 'q=hello' })
       expect(state.toJS()).to.have.property('filterString', 'q=hello')
     })
   })
 
   describe('Load entities success', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
     it('start', () => {
       state = reducer(state, { type: LOAD_ENTITIES_START })
       expect(state.toJS()).to.have.property('isLoading', true)
@@ -114,7 +120,7 @@ describe('Query Reducer', () => {
   })
 
   describe('Load entities fail', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
 
     it('start', () => {
       state = reducer(state, { type: LOAD_ENTITIES_START })
@@ -129,7 +135,7 @@ describe('Query Reducer', () => {
   })
 
   describe('Load more fail', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
     state = loadEntities({ moduleName, state, reducer, data })
 
     it('start', () => {
@@ -145,7 +151,7 @@ describe('Query Reducer', () => {
   })
 
   describe('Load more success', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
     state = loadEntities({ moduleName, state, reducer, data })
 
     it('start', () => {
@@ -174,7 +180,7 @@ describe('Query Reducer', () => {
   })
 
   describe('Load detail success', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
     state = loadEntities({ moduleName, state, reducer, data })
 
     it('start', () => {
@@ -201,7 +207,7 @@ describe('Query Reducer', () => {
   })
 
   describe('Load detail fail', () => {
-    let state = fromJS(initialState.toJS())
+    let state = CrudRecord(rawInitialState)
     state = loadEntities({ moduleName, state, reducer, data })
 
     it('start', () => {
@@ -223,8 +229,8 @@ describe('Query Reducer', () => {
 
   describe('Dismiss notification', () => {
     // Assume it has notificationMessage
-    let state = fromJS({
-      ...initialState.toJS(),
+    let state = CrudRecord({
+      ...rawInitialState,
       notification: {
         message: 'Add Successfully',
         style: 'info',

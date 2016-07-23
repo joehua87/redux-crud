@@ -1,29 +1,10 @@
 /* eslint-disable new-cap */
+// @flow
 
-import { fromJS, OrderedMap } from 'immutable'
+import { Record, OrderedMap } from 'immutable'
+import { initialState } from './initial-state'
 
-export const initialState = fromJS({
-  isLoading: false,
-  isLoadingFilterGuide: false,
-  isLoadingDetail: false,
-  isLoadingMore: false,
-  isEdit: false,
-  isRemove: false,
-  entities: OrderedMap({}),
-  filterString: '',
-  query: {
-    page: 0,
-  },
-  count: 0,
-  hasMore: false,
-  selected: null,
-  isShowDetail: false,
-  filterFields: [],
-  isShowFilterGuide: false,
-  error: null,
-})
-
-export default function createReducer(constants) {
+export default function createReducer(constants: { [key: string]: string }) {
   const {
     keyField,
     LOAD_ENTITIES_START, LOAD_ENTITIES_SUCCESS, LOAD_ENTITIES_FAIL,
@@ -35,8 +16,9 @@ export default function createReducer(constants) {
     DISMISS_NOTIFICATION,
   } = constants
 
-  return (state = initialState, action = {}) => {
-    const { entities, count, ...query } = action.payload || {}
+  return function reducer(state: Record<CrudState<any>> = initialState, action: ReduxAction = {}): Record<CrudState<any>> {
+    const { entities, count, fields, ...query } = action.payload || {}
+    const result = entities && entities.map((entity) => (entity[keyField]))
     const entitiesMap = entities && entities.reduce((acc, value) => ({ ...acc, [value[keyField]]: value }), {})
 
     switch (action.type) {
@@ -48,6 +30,7 @@ export default function createReducer(constants) {
         return state
           .set('isLoading', false)
           .set('entities', OrderedMap(entitiesMap))
+          .set('result', result)
           .set('query', query)
           .set('count', count)
           .set('hasMore', count > (query.page) * query.limit)
@@ -67,6 +50,9 @@ export default function createReducer(constants) {
         return state
           .set('isLoadingMore', false)
           .mergeIn(['entities'], entitiesMap)
+          .update('result',
+            (value) => value.concat(result)
+          )
           .set('query', query)
           .set('hasMore', count > (query.page) * query.limit)
           .set('error', null)
@@ -108,7 +94,7 @@ export default function createReducer(constants) {
 
       case SHOW_FILTER_GUIDE_SUCCESS:
         return state
-          .set('filterFields', action.payload.fields)
+          .set('filterFields', fields)
           .set('isShowFilterGuide', true)
           .set('isLoadingFilterGuide', false)
 

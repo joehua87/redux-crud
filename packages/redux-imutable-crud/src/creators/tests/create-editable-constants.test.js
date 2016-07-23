@@ -1,3 +1,5 @@
+// @flow
+
 import createQueryConstants from '../create-editable-constants'
 import { expect } from 'chai'
 

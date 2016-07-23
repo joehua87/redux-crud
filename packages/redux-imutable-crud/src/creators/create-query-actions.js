@@ -1,22 +1,9 @@
+// @flow
+
 import { createAction } from 'redux-actions'
 import createQueryConstants from './create-query-constants'
 
-export const defaultInitialState = {
-  isLoading: false,
-  isLoadingFilterGuide: false,
-  isLoadingDetail: false,
-  isLoadingMore: false,
-  entities: [],
-  count: 0,
-  page: 1,
-  selected: null,
-  isShowDetail: false,
-  filterFields: [],
-  isShowFilterGuide: false,
-  error: null,
-}
-
-export default function createActions(moduleName) {
+export default function createActions(moduleName: string) {
   const {
     LOAD_ENTITIES_START,
     LOAD_MORE_START,

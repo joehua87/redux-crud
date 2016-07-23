@@ -1,4 +1,6 @@
-export default function createQueryConstants(name, { keyField } = {}) {
+// @flow
+
+export default function createQueryConstants(name: string, { keyField }: { keyField: string } = {}) {
   return {
     keyField: keyField || '_id',
 

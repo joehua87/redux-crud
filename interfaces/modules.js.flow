@@ -1,0 +1,11 @@
+declare module 'qs' {
+  declare var exports: any;
+}
+
+declare module 'chai-things' {
+  declare var exports: any;
+}
+
+declare module 'immutable' {
+  declare var exports: any;
+}

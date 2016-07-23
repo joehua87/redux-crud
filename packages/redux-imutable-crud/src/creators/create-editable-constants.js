@@ -1,6 +1,8 @@
+// @flow
+
 import createQueryConstants from './create-query-constants'
 
-export default function createEditableConstants(name, options = {}) {
+export default function createEditableConstants(name:string, options:any = {}) {
   return {
     ...createQueryConstants(name, options),
     CREATE_START: `${name}/CREATE_START`,

@@ -1,8 +1,11 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle, new-cap */
+// @flow
 
-import createQueryReducer, { initialState } from './create-query-reducer'
+import { Record } from 'immutable'
+import createQueryReducer from './create-query-reducer'
+import { initialState } from './initial-state'
 
-export default function createEditableReducer(constants) {
+export default function createEditableReducer(constants: { [key: string]: string }) {
   const {
     keyField,
     CREATE_START, CREATE_SUCCESS, CREATE_FAIL,
@@ -14,7 +17,8 @@ export default function createEditableReducer(constants) {
     SUBMIT_REMOVE_START, SUBMIT_REMOVE_SUCCESS, SUBMIT_REMOVE_FAIL,
   } = constants
 
-  return (state = initialState, action) => {
+  return function reducer(state: Record<CrudState<any>> = initialState, action: ReduxAction = {}): Record<CrudState<any>> {
+    const payload = action.payload || {}
     switch (action.type) {
       case CREATE_START:
         return state
@@ -22,12 +26,12 @@ export default function createEditableReducer(constants) {
       case CREATE_SUCCESS:
         return state
           .set('isSubmittingEdit', false)
-          .set('selected', action.payload)
+          .set('selected', payload)
           .update('count', (count) => count + 1)
-          .mergeIn(['entities'], { [action.payload[keyField]]: action.payload })
+          .mergeIn(['entities'], { [payload[keyField]]: payload })
           .set('notification', {
             message: 'Create Successfully',
-            style: 'info',
+            type: 'info',
           })
 
       case CREATE_FAIL:
@@ -35,7 +39,7 @@ export default function createEditableReducer(constants) {
           .set('isSubmittingEdit', false)
           .set('notification', {
             message: 'Create Fail',
-            style: 'error',
+            type: 'error',
           })
 
       case EDIT:
@@ -56,31 +60,31 @@ export default function createEditableReducer(constants) {
       case SUBMIT_EDIT_SUCCESS:
         return state
           .set('isSubmittingEdit', false)
-          .set('selected', action.payload)
+          .set('selected', payload)
           .set('notification', {
             message: 'Save Successfully',
-            style: 'info',
+            type: 'info',
           })
-          .mergeIn(['entities', action.payload[keyField]], action.payload)
+          .mergeIn(['entities', payload[keyField]], payload)
 
       case SUBMIT_EDIT_FAIL:
         return state
           .set('isSubmittingEdit', false)
           .set('notification', {
             message: 'Save Fail',
-            style: 'error',
+            type: 'error',
           })
 
       case SUBMIT_ADD_SUCCESS:
         return state
           .set('isSubmittingEdit', false)
           .set('isEdit', false)
-          .set('selected', action.payload)
+          .set('selected', payload)
           .update('count', (count) => count + 1)
-          .mergeIn(['entities'], { [action.payload[keyField]]: action.payload })
+          .mergeIn(['entities'], { [payload[keyField]]: payload })
           .set('notification', {
             message: 'Add Successfully',
-            style: 'info',
+            type: 'info',
           })
 
       case SUBMIT_ADD_FAIL:
@@ -89,7 +93,7 @@ export default function createEditableReducer(constants) {
           .set('isSubmittingEdit', false)
           .set('notification', {
             message: 'Add Fail',
-            style: 'error',
+            type: 'error',
           })
 
       case CANCEL_ADD:
@@ -101,7 +105,7 @@ export default function createEditableReducer(constants) {
       case REMOVE:
         return state
           .set('isRemove', true)
-          .set('selected', state.getIn(['entities', action.payload]))
+          .set('selected', state.getIn(['entities', payload]))
 
       case CANCEL_REMOVE:
         return state
@@ -117,10 +121,10 @@ export default function createEditableReducer(constants) {
           .set('isRemove', false)
           .set('isSubmittingRemove', false)
           .update('count', (count) => count - 1)
-          .deleteIn(['entities', action.payload[keyField]])
+          .deleteIn(['entities', payload[keyField]])
           .set('notification', {
             message: 'Remove Successfully',
-            style: 'info',
+            type: 'info',
           })
           .set('selected', null)
 
@@ -131,7 +135,7 @@ export default function createEditableReducer(constants) {
           .set('selected', null)
           .set('notification', {
             message: 'Remove Fail',
-            style: 'error',
+            type: 'error',
           })
 
       default:

@@ -1,8 +1,10 @@
+// @flow
+
 import { createAction } from 'redux-actions'
 import createEditableConstants from './create-editable-constants'
 import createQueryActions from './create-query-actions'
 
-export default function createEditableActions(moduleName) {
+export default function createEditableActions(moduleName: string) {
   const {
     CREATE_START,
     EDIT, CANCEL_EDIT,

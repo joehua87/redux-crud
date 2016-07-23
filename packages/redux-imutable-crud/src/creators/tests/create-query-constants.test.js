@@ -1,3 +1,5 @@
+// @flow
+
 import createQueryConstants from '../create-query-constants'
 import { expect } from 'chai'
 
