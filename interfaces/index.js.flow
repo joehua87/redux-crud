@@ -4,10 +4,14 @@ export type FilterItem = {
   dbType: any,
 }
 
-export type ReduxAction = {
+export type PayloadAction = {
   type?: string,
   payload?: any,
 }
+
+export type FunctionAction = (dispatch: Function) => any
+
+export type ReduxAction = PayloadAction
 
 export type NotificationType = 'info' | 'error' | 'warning'
 
@@ -38,4 +42,39 @@ export interface CrudState<T> {
   isShowFilterGuide: boolean,
   error: any,
   notification: Notification,
+}
+
+export type CreateRequestSagaParams = {
+  types: Array<string>,
+  method: string,
+  url: string | (params : { payload: any }) => string,
+  headers?: { [key:string]: any },
+  params?: { [key:string]: any },
+  data?: any,
+  selectState?: Function,
+}
+
+export type CreateListSagaParams = {
+  constants: { [key: string]: string },
+  endpoint: string,
+  headers?: { [key:string]: any },
+  selectState: Function,
+  listProjection: string,
+  detailProjection: string,
+}
+
+export type QuerySaga = {
+  loadEntitiesSaga: Function,
+  loadMoreSaga: Function,
+  loadDetailSaga: Function,
+  showFilterGuideSaga: Function,
+  list: Array<Function>,
+}
+
+export type EditableSaga = {
+  submitAddSaga: Function,
+  submitEditSaga: Function,
+  submitRemoveSaga: Function,
+  createSaga: Function,
+  list: Array<Function>,
 }

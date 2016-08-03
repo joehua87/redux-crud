@@ -4,7 +4,7 @@ import createQueryConstants from '../create-query-constants'
 import createQueryActions from '../create-query-actions'
 import createQuerySagas from '../create-query-sagas'
 // import { LOCATION_CHANGE } from 'react-router-redux'
-import { race, take, call, put, select } from 'redux-saga/effects'
+import { take, call, put, select } from 'redux-saga/effects'
 import request from '../../utils/request'
 
 const constants = createQueryConstants('postCategory')
@@ -67,17 +67,14 @@ describe('loadEntitiesSaga', () => {
   function commonStep(generator) {
     let next
 
-    it('race', () => {
+    it('start', () => {
       next = generator.next()
-      const expectedNextCall = race({
-        load: take(constants.LOAD_ENTITIES_START),
-        // stop: take(LOCATION_CHANGE),
-      })
+      const expectedNextCall = take(constants.LOAD_ENTITIES_START)
       expect(next.value).to.deep.equal(expectedNextCall)
     })
 
     it('receive LOAD_ENTITIES_START', () => {
-      next = generator.next({ load: actions.loadEntities({ filter: { q: 'hello' }, sort: 'slug' }) })
+      next = generator.next(actions.loadEntities({ filter: { q: 'hello' }, sort: 'slug' }))
       const expectedNextCall = call(request, 'http://localhost/post-category/query', requestArgs)
       expect(next.value).to.deep.equal(expectedNextCall)
     })
@@ -116,19 +113,14 @@ describe('loadMoreSaga', () => {
   function commonStep(generator) {
     let next
 
-    it('race', () => {
+    it('start', () => {
       next = generator.next()
-
-      const expectedRace = race({
-        load: take(constants.LOAD_MORE_START),
-        // stop: take(LOCATION_CHANGE),
-      })
-
+      const expectedRace = take(constants.LOAD_MORE_START)
       expect(next.value).to.deep.equal(expectedRace)
     })
 
     it('receive LOAD_MORE_START', () => {
-      next = generator.next({ load: actions.loadMore() })
+      next = generator.next(actions.loadMore())
       const expectedNextCall = select(selectState)
       expect(next.value).to.deep.equal(expectedNextCall)
     })
@@ -175,17 +167,12 @@ describe('loadDetailSaga', () => {
 
     it('race', () => {
       next = generator.next()
-
-      const expectedRace = race({
-        load: take(constants.LOAD_DETAIL_START),
-        // stop: take(LOCATION_CHANGE),
-      })
-
+      const expectedRace = take(constants.LOAD_DETAIL_START)
       expect(next.value).to.deep.equal(expectedRace)
     })
 
     it('receive LOAD_DETAIL_START', () => {
-      next = generator.next({ load: actions.loadDetail('some-id') })
+      next = generator.next(actions.loadDetail('some-id'))
       const expectedNextCall = call(request, 'http://localhost/post-category/id/some-id', loadDetailArgs)
       expect(next.value).to.deep.equal(expectedNextCall)
     })

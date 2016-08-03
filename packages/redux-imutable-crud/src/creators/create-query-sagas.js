@@ -1,13 +1,16 @@
+// @flow
+
 import omitBy from 'lodash/omitBy'
 import createRequestSaga from './create-request-saga'
 
 export default function createQuerySaga({
   constants,
   endpoint,
+  headers,
   selectState,
   listProjection,
   detailProjection,
-}) {
+}: CreateListSagaParams): QuerySaga {
   const {
     LOAD_ENTITIES_START,
     LOAD_ENTITIES_SUCCESS,
@@ -27,6 +30,7 @@ export default function createQuerySaga({
     types: [LOAD_ENTITIES_START, LOAD_ENTITIES_SUCCESS, LOAD_ENTITIES_FAIL],
     method: 'get',
     url: `${endpoint}/query`,
+    headers,
     params: ({ payload: { page, limit, sort, projection, filter } }) => omitBy({
       filter,
       page,
@@ -40,6 +44,7 @@ export default function createQuerySaga({
     types: [LOAD_MORE_START, LOAD_MORE_SUCCESS, LOAD_MORE_FAIL],
     method: 'get',
     url: `${endpoint}/query`,
+    headers,
     selectState, // Need use state to get current page, limit
     params: ({ state: { query: { page, limit, sort, projection, filter } } }) => omitBy({
       filter,
@@ -54,6 +59,7 @@ export default function createQuerySaga({
     types: [LOAD_DETAIL_START, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
     method: 'get',
     url: ({ payload }) => `${endpoint}/id/${payload}`,
+    headers,
     params: omitBy({
       projection: detailProjection,
     }, (prop) => !prop),
@@ -63,6 +69,7 @@ export default function createQuerySaga({
     types: [SHOW_FILTER_GUIDE_START, SHOW_FILTER_GUIDE_SUCCESS, SHOW_FILTER_GUIDE_FAIL],
     method: 'get',
     url: `${endpoint}/get-config`,
+    headers,
   })
 
   // Return object for easier testing each function

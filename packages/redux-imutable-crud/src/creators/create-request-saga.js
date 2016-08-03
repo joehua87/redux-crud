@@ -1,22 +1,12 @@
 // @flow
 
-import { take, call, put, race, select } from 'redux-saga/effects'
+import { take, call, put, select } from 'redux-saga/effects'
 import omitBy from 'lodash/omitBy'
 // import { LOCATION_CHANGE } from 'react-router-redux'
 import request from '../utils/request'
 import { createAction } from 'redux-actions'
 
 const debug = require('debug')('redux-immutable-crud:create-request-saga')
-
-type CreateRequestSagaParams = {
-  types: Array<string>,
-  method: string,
-  url: string | () => string,
-  headers: { [key:string]: any },
-  params: { [key:string]: any },
-  data: any,
-  selectState: Function,
-}
 
 /**
  *
@@ -29,29 +19,22 @@ type CreateRequestSagaParams = {
  * @param selectState
  * @returns {Function}
  */
-export default function createRequestSaga({ types, method, url, headers, params, data, selectState }: CreateRequestSagaParams):Function {
+export default function createRequestSaga({ types, method, url, headers, params, data, selectState }
+  : CreateRequestSagaParams):Function {
   return function*() { // eslint-disable-line func-names
     const [START, SUCCESS, FAIL] = types
     const success = createAction(SUCCESS)
     const fail = createAction(FAIL)
 
     while (true) { // eslint-disable-line no-constant-condition
-      const watcher = yield race({
-        load: take(START),
-        // stop: take(LOCATION_CHANGE), // stop watching if user leaves page
-      })
-
-      debug('Race Watcher', watcher)
-
-      if (!watcher || watcher.stop) break
+      const load = yield take(START)
+      const payload = load && load.payload
 
       let state = null
       if (selectState) {
         state = yield select(selectState)
         debug('State', state)
       }
-
-      const payload = watcher.load && watcher.load.payload
 
       let finalUrl = url
       if (typeof url === 'function') {
