@@ -9,12 +9,12 @@
 [include]
 
 [libs]
-./interfaces/modules.js.flow
-./interfaces/index.js.flow
 ./flow-typed/npm/axios_v0.11.x.js
 ./flow-typed/npm/debug_v2.x.x.js
 ./flow-typed/npm/mocha_v2.4.x.js
 ./flow-typed/npm/redux-actions_v0.9.x.js
+./packages/redux-immutable-crud/interfaces/modules.js.flow
+./packages/redux-immutable-crud/interfaces/index.js.flow
 ./node_modules/immutable/dist/immutable.js.flow
 
 [options]
