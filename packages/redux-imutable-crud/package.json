@@ -2,6 +2,9 @@
   "name": "redux-immutable-crud",
   "version": "0.1.13",
   "main": "lib",
+  "files": [
+    "interfaces"
+  ],
   "description": "",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel --ignore='tests/*' --out-dir ./lib ./src",
