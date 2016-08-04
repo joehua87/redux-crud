@@ -6,7 +6,6 @@ import chai from 'chai'
 import createQueryConstants from '../create-query-constants'
 import createQueryReducer from '../create-query-reducer.js'
 import { rawInitialState } from '../initial-state.js'
-import reduce from 'lodash/reduce'
 import data from './test-data/categories.json'
 import dataMore from './test-data/categories-more.json'
 import filterGuide from './test-data/filter-guide.json'
@@ -172,11 +171,13 @@ describe('Query Reducer', () => {
       expect(Object.keys(state.toJS().entities)).to.have.property('length', 14)
     })
 
+    /* Remove because use result to set order
     it('keep ordered', () => {
       const expectEntities = [...data.entities, ...dataMore.entities]
       const entities = reduce(state.toJS().entities, (acc, value) => [...acc, value], [])
       expect(entities).to.deep.equal(expectEntities)
     })
+    */
   })
 
   describe('Load detail success', () => {

@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 // @flow
 
-import { Record, OrderedMap } from 'immutable'
+import { fromJS } from 'immutable'
 import { initialState } from './initial-state'
 
 export default function createReducer(constants: { [key: string]: string }) {
@@ -16,7 +16,7 @@ export default function createReducer(constants: { [key: string]: string }) {
     DISMISS_NOTIFICATION,
   } = constants
 
-  return function reducer(state: Record<CrudState<any>> = initialState, action: ReduxAction = {}): Record<CrudState<any>> {
+  return function reducer(state: Map<string, any> = initialState, action: ReduxAction = {}): Map<string, any> {
     const { entities, count, fields, ...query } = action.payload || {}
     const result = entities && entities.map((entity) => (entity[keyField]))
     const entitiesMap = entities && entities.reduce((acc, value) => ({ ...acc, [value[keyField]]: value }), {})
@@ -29,7 +29,7 @@ export default function createReducer(constants: { [key: string]: string }) {
       case LOAD_ENTITIES_SUCCESS:
         return state
           .set('isLoading', false)
-          .set('entities', OrderedMap(entitiesMap))
+          .set('entities', fromJS(entitiesMap))
           .set('result', result)
           .set('query', query)
           .set('count', count)
@@ -48,11 +48,11 @@ export default function createReducer(constants: { [key: string]: string }) {
 
       case LOAD_MORE_SUCCESS:
         return state
-          .set('isLoadingMore', false)
-          .mergeIn(['entities'], entitiesMap)
           .update('result',
             (value) => value.concat(result)
           )
+          .set('isLoadingMore', false)
+          .mergeIn(['entities'], entitiesMap)
           .set('query', query)
           .set('hasMore', count > (query.page) * query.limit)
           .set('error', null)

@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle, new-cap */
 // @flow
 
-import { Record } from 'immutable'
 import createQueryReducer from './create-query-reducer'
 import { initialState } from './initial-state'
 
@@ -17,7 +16,7 @@ export default function createEditableReducer(constants: { [key: string]: string
     SUBMIT_REMOVE_START, SUBMIT_REMOVE_SUCCESS, SUBMIT_REMOVE_FAIL,
   } = constants
 
-  return function reducer(state: Record<CrudState<any>> = initialState, action: ReduxAction = {}): Record<CrudState<any>> {
+  return function reducer(state: Map<string, any> = initialState, action: ReduxAction = {}): Map<string, any> {
     const payload = action.payload || {}
     switch (action.type) {
       case CREATE_START:
@@ -25,9 +24,9 @@ export default function createEditableReducer(constants: { [key: string]: string
           .set('isSubmittingEdit', true)
       case CREATE_SUCCESS:
         return state
+          .update('count', (count) => count + 1)
           .set('isSubmittingEdit', false)
           .set('selected', payload)
-          .update('count', (count) => count + 1)
           .mergeIn(['entities'], { [payload[keyField]]: payload })
           .set('notification', {
             message: 'Create Successfully',
@@ -77,10 +76,10 @@ export default function createEditableReducer(constants: { [key: string]: string
 
       case SUBMIT_ADD_SUCCESS:
         return state
+          .update('count', (count) => count + 1)
           .set('isSubmittingEdit', false)
           .set('isEdit', false)
           .set('selected', payload)
-          .update('count', (count) => count + 1)
           .mergeIn(['entities'], { [payload[keyField]]: payload })
           .set('notification', {
             message: 'Add Successfully',
@@ -118,9 +117,9 @@ export default function createEditableReducer(constants: { [key: string]: string
 
       case SUBMIT_REMOVE_SUCCESS:
         return state
+          .update('count', (count) => count - 1)
           .set('isRemove', false)
           .set('isSubmittingRemove', false)
-          .update('count', (count) => count - 1)
           .deleteIn(['entities', payload[keyField]])
           .set('notification', {
             message: 'Remove Successfully',

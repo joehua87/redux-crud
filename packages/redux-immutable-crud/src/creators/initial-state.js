@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 // @flow
 
-import { Record } from 'immutable'
+import { fromJS } from 'immutable'
 
 export const rawInitialState: CrudState<any> = {
   isLoading: false,
@@ -30,5 +30,5 @@ export const rawInitialState: CrudState<any> = {
     message: '',
   },
 }
-export const CrudRecord = Record(rawInitialState)
-export const initialState = CrudRecord(rawInitialState)
+// export const CrudRecord = fromJS(rawInitialState)
+export const initialState = fromJS(rawInitialState)
