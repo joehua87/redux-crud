@@ -24,6 +24,9 @@ export default function createEditableReducer(constants: { [key: string]: string
           .set('isSubmittingEdit', true)
       case CREATE_SUCCESS:
         return state
+          .update('result',
+            (value) => value.concat(payload[keyField])
+          )
           .update('count', (count) => count + 1)
           .set('isSubmittingEdit', false)
           .set('selected', payload)
@@ -76,6 +79,9 @@ export default function createEditableReducer(constants: { [key: string]: string
 
       case SUBMIT_ADD_SUCCESS:
         return state
+          .update('result',
+            (value) => value.concat(payload[keyField])
+          )
           .update('count', (count) => count + 1)
           .set('isSubmittingEdit', false)
           .set('isEdit', false)
@@ -117,6 +123,9 @@ export default function createEditableReducer(constants: { [key: string]: string
 
       case SUBMIT_REMOVE_SUCCESS:
         return state
+          .update('result',
+            (value) => value.filter((_id) => _id !== payload[keyField]) // TODO Refactor me
+          )
           .update('count', (count) => count - 1)
           .set('isRemove', false)
           .set('isSubmittingRemove', false)
