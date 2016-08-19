@@ -24,10 +24,10 @@ export default function createEditableReducer(constants: { [key: string]: string
           .set('isSubmittingEdit', true)
       case CREATE_SUCCESS:
         return state
-          .update('result',
-            (value) => value.concat(payload[keyField])
-          )
           .update('count', (count) => count + 1)
+          .update('result',
+            (value) => [payload[keyField], ...value]
+          )
           .set('isSubmittingEdit', false)
           .set('selected', payload)
           .mergeIn(['entities'], { [payload[keyField]]: payload })
@@ -79,10 +79,10 @@ export default function createEditableReducer(constants: { [key: string]: string
 
       case SUBMIT_ADD_SUCCESS:
         return state
-          .update('result',
-            (value) => value.concat(payload[keyField])
-          )
           .update('count', (count) => count + 1)
+          .update('result',
+            (value) => [payload[keyField], ...value]
+          )
           .set('isSubmittingEdit', false)
           .set('isEdit', false)
           .set('selected', payload)
