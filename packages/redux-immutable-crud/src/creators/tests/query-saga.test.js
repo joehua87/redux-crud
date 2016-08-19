@@ -44,7 +44,7 @@ const requestArgs = {
   method: 'get',
   params: {
     filter: { q: 'hello' },
-    sort: 'slug'
+    sort: 'slug',
   },
 }
 
@@ -74,7 +74,7 @@ describe('loadEntitiesSaga', () => {
     })
 
     it('receive LOAD_ENTITIES_START', () => {
-      next = generator.next(actions.loadEntities({ filter: { q: 'hello' }, sort: 'slug' }))
+      next = generator.next(actions.loadEntities(requestArgs.params))
       const expectedNextCall = call(request, 'http://localhost/post-category/query', requestArgs)
       expect(next.value).to.deep.equal(expectedNextCall)
     })
@@ -88,6 +88,38 @@ describe('loadEntitiesSaga', () => {
 
     it('put data', () => {
       const payload = { entities: [] }
+      next = generator.next({ data: payload }) // success case
+      const expectedNextCall = put(createAction(constants.LOAD_ENTITIES_SUCCESS)(payload))
+      expect(next.value).to.deep.equal(expectedNextCall)
+    })
+  })
+
+  describe('load correct params', () => {
+    const args = {
+      method: 'get',
+      params: {
+        filter: { q: 'hello' },
+        sort: 'slug',
+      },
+    }
+
+    const generator = loadEntitiesSaga()
+    let next
+
+    it('start', () => {
+      next = generator.next()
+      const expectedNextCall = take(constants.LOAD_ENTITIES_START)
+      expect(next.value).to.deep.equal(expectedNextCall)
+    })
+
+    it('receive LOAD_ENTITIES_START', () => {
+      next = generator.next(actions.loadEntities(args.params))
+      const expectedNextCall = call(request, 'http://localhost/post-category/query', args)
+      expect(next.value).to.deep.equal(expectedNextCall)
+    })
+
+    it('put data', () => {
+      const payload = { entities: [], query: args.params }
       next = generator.next({ data: payload }) // success case
       const expectedNextCall = put(createAction(constants.LOAD_ENTITIES_SUCCESS)(payload))
       expect(next.value).to.deep.equal(expectedNextCall)

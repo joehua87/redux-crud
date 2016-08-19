@@ -31,11 +31,12 @@ export default function createQuerySaga({
     method: 'get',
     url: `${endpoint}/query`,
     headers,
-    params: ({ payload: { page, limit, sort, projection, filter } }) => omitBy({
+    params: ({ payload: { page, limit, sort, projection, filter, getAll } }) => omitBy({
       filter,
       page,
       limit,
       sort,
+      getAll,
       projection: projection || listProjection, // prefer params passed from container
     }, (prop) => !prop), // Keep only has value props
   })
