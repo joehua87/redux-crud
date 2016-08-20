@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 // @flow
 
-import { Record } from 'immutable'
+import { fromJS } from 'immutable'
 import createEditableConstants from '../create-editable-constants'
 import createEditableReducer from '../create-editable-reducer.js'
 import { rawInitialState } from '../initial-state.js'
@@ -28,14 +28,12 @@ const {
   SUBMIT_REMOVE_START, SUBMIT_REMOVE_SUCCESS, SUBMIT_REMOVE_FAIL,
 } = constants
 
-const CrudRecord = Record(rawInitialState)
-
 describe('Editable Reducer', () => {
   describe('Add', () => {
     let state
 
     beforeEach(() => {
-      state = CrudRecord(rawInitialState)
+      state = fromJS(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -103,7 +101,7 @@ describe('Editable Reducer', () => {
     let state
 
     beforeEach(() => {
-      state = CrudRecord(rawInitialState)
+      state = fromJS(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -150,7 +148,7 @@ describe('Editable Reducer', () => {
   describe('Edit', () => {
     let state
     beforeEach(() => {
-      state = CrudRecord(rawInitialState)
+      state = fromJS(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
@@ -215,7 +213,7 @@ describe('Editable Reducer', () => {
   describe('Remove', () => {
     let state
     beforeEach(() => {
-      state = CrudRecord(rawInitialState)
+      state = fromJS(rawInitialState)
       state = loadEntities({ moduleName, state, reducer, data })
     })
 
