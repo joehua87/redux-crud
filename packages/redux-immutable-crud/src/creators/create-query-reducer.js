@@ -11,6 +11,7 @@ export default function createReducer(constants: { [key: string]: string }) {
     LOAD_MORE_START, LOAD_MORE_SUCCESS, LOAD_MORE_FAIL,
     LOAD_DETAIL_START, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL, CLOSE_DETAIL,
     SHOW_FILTER_GUIDE_START, SHOW_FILTER_GUIDE_SUCCESS, SHOW_FILTER_GUIDE_FAIL,
+    SELECT,
     CLOSE_FILTER_GUIDE,
     CHANGE_FILTER_STRING,
     DISMISS_NOTIFICATION,
@@ -63,6 +64,15 @@ export default function createReducer(constants: { [key: string]: string }) {
           .set('error', action.payload)
           .set('selected', null)
           .set('isEdit', false)
+
+      case SELECT:
+        return state
+          .update('selection', (selection) => (
+            selection.includes(action.payload)
+            ? selection.remove(selection.indexOf(action.payload))
+            : selection.concat(action.payload)
+          )
+        )
 
       case LOAD_DETAIL_START:
         return state

@@ -28,6 +28,8 @@ const {
   LOAD_MORE_SUCCESS,
   LOAD_MORE_FAIL,
 
+  SELECT,
+
   LOAD_DETAIL_START,
   LOAD_DETAIL_SUCCESS,
   LOAD_DETAIL_FAIL,
@@ -115,6 +117,18 @@ describe('Query Reducer', () => {
       expect(state.toJS().query).to.have.property('page', 1)
       expect(state.toJS().query).to.have.property('limit', 10)
       expect(Object.keys(state.toJS().entities)).to.have.property('length', 10)
+    })
+
+    const _id = data.entities[0]._id
+
+    it('select', () => {
+      state = reducer(state, { type: SELECT, payload: _id })
+      expect(state.get('selection')).to.includes(_id)
+    })
+
+    it('deselect', () => {
+      state = reducer(state, { type: SELECT, payload: _id })
+      expect(state.get('selection')).to.not.includes(_id)
     })
   })
 

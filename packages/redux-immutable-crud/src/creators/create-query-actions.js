@@ -5,6 +5,7 @@ import createQueryConstants from './create-query-constants'
 
 export default function createActions(moduleName: string) {
   const {
+    SELECT,
     LOAD_ENTITIES_START,
     LOAD_MORE_START,
     LOAD_DETAIL_START,
@@ -16,6 +17,7 @@ export default function createActions(moduleName: string) {
   } = createQueryConstants(moduleName)
 
   return {
+    select: createAction(SELECT),
     loadEntities: createAction(LOAD_ENTITIES_START),
     loadMore: createAction(LOAD_MORE_START),
     loadDetail: createAction(LOAD_DETAIL_START),

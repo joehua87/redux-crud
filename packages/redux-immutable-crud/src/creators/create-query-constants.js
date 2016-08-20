@@ -4,6 +4,8 @@ export default function createQueryConstants(name: string, { keyField }: { keyFi
   return {
     keyField: keyField || '_id',
 
+    SELECT: `${name}/SELECT`,
+
     LOAD_ENTITIES_START: `${name}/LOAD_ENTITIES_START`,
     LOAD_ENTITIES_SUCCESS: `${name}/LOAD_ENTITIES_SUCCESS`,
     LOAD_ENTITIES_FAIL: `${name}/LOAD_ENTITIES_FAIL`,

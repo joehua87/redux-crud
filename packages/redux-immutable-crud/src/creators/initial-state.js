@@ -17,6 +17,7 @@ export const rawInitialState: CrudState<any> = {
   count: 0,
   hasMore: false,
   selected: null,
+  selection: [],
   isShowDetail: false,
   isEdit: false,
   isRemove: false,
