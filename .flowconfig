@@ -13,8 +13,8 @@
 ./flow-typed/npm/debug_v2.x.x.js
 ./flow-typed/npm/mocha_v2.4.x.js
 ./flow-typed/npm/redux-actions_v0.9.x.js
-./packages/redux-immutable-crud/interfaces/modules.js.flow
-./packages/redux-immutable-crud/interfaces/index.js.flow
+./flow-typed/modules.js.flow
+./packages/redux-crud-flowtype/index.js.flow
 ./node_modules/immutable/dist/immutable.js.flow
 
 [options]

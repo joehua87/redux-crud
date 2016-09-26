@@ -3,7 +3,7 @@
 
 import { fromJS } from 'immutable'
 import chai from 'chai'
-import createQueryConstants from '../create-query-constants'
+import { createQueryConstants } from 'redux-crud-actions'
 import createQueryReducer from '../create-query-reducer.js'
 import { rawInitialState } from '../initial-state.js'
 import data from './test-data/categories.json'

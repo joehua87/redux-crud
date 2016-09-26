@@ -2,7 +2,7 @@
 // @flow
 
 import { fromJS } from 'immutable'
-import createEditableConstants from '../create-editable-constants'
+import { createEditableConstants } from 'redux-crud-actions'
 import createEditableReducer from '../create-editable-reducer.js'
 import { rawInitialState } from '../initial-state.js'
 import { expect } from 'chai'

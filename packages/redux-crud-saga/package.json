@@ -1,5 +1,5 @@
 {
-  "name": "redux-immutable-crud",
+  "name": "redux-crud-saga",
   "version": "0.2.0",
   "main": "lib",
   "files": [
@@ -22,16 +22,13 @@
     "chai": "^3.5.0",
     "chai-things": "^0.2.0",
     "cross-env": "^1.0.8",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "redux-actions": ">=0.12.0",
+    "redux-crud-actions": "1.0.0"
   },
   "peerDependencies": {
     "axios": ">=0.12.0",
-    "immutable": ">=3.8.0",
     "qs": ">=6.0.0",
-    "react": ">=15.0.0",
-    "react-router-redux": ">=4.0.0",
-    "redux": ">=3.5.0",
-    "redux-actions": ">=0.10.0",
     "redux-saga": ">=0.10.0"
   },
   "author": "joehua",

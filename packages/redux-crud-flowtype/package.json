@@ -1,0 +1,13 @@
+{
+  "name": "redux-crud-flowtype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'ignore me'",
+    "build": "echo 'ignore me'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
