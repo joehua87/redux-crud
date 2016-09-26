@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib",
   "scripts": {
+    "build": "cross-env NODE_ENV=production babel --ignore='tests/*' --out-dir ./lib ./src",
     "test": "mocha --require babel-register --require babel-polyfill 'src/**/__test__/**/*.test.js'"
   },
   "keywords": [],
