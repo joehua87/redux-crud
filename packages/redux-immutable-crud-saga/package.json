@@ -1,6 +1,6 @@
 {
   "name": "redux-immutable-crud-saga",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib",
   "files": [
     "interfaces",
