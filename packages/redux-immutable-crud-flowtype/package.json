@@ -2,12 +2,12 @@
   "name": "redux-immutable-crud-flowtype",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.js.flow",
   "scripts": {
     "test": "echo 'ignore me'",
     "build": "echo 'ignore me'"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

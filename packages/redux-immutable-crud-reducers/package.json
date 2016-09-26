@@ -2,7 +2,7 @@
   "name": "redux-immutable-crud-reducers",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib",
   "scripts": {
     "test": "mocha --require babel-register --require babel-polyfill 'src/**/__test__/**/*.test.js'"
   },
