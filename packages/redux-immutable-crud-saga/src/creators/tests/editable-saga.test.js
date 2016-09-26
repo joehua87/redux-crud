@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { createEditableConstants } from 'redux-crud-actions'
+import { createEditableConstants } from 'redux-immutable-crud-actions'
 import createEditableSagas from '../create-editable-sagas'
 
 const constants = createEditableConstants('postCategory')

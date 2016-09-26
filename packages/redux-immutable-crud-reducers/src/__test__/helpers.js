@@ -1,6 +1,6 @@
 // @flow
 
-import { createQueryConstants } from 'redux-crud-actions'
+import { createQueryConstants } from 'redux-immutable-crud-actions'
 
 type LoadEntitiesParams = {
   moduleName: string,

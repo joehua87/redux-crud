@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { createAction } from 'redux-actions'
-import { createQueryConstants, createQueryActions } from 'redux-crud-actions'
+import { createQueryConstants, createQueryActions } from 'redux-immutable-crud-actions'
 import createQuerySagas from '../create-query-sagas'
 // import { LOCATION_CHANGE } from 'react-router-redux'
 import { take, call, put, select } from 'redux-saga/effects'

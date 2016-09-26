@@ -1,17 +1,16 @@
 {
-  "name": "redux-crud-actions",
-  "version": "1.0.0",
+  "name": "redux-immutable-crud-reducers",
+  "version": "1.0.1",
   "description": "",
-  "main": "lib",
+  "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel --ignore='tests/*' --out-dir ./lib ./src",
     "test": "mocha --require babel-register --require babel-polyfill 'src/**/__test__/**/*.test.js'"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "redux-actions": "^0.12.0"
+    "immutable": "^3.8.1"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
@@ -22,6 +21,10 @@
     "chai": "^3.5.0",
     "chai-things": "^0.2.0",
     "cross-env": "^1.0.8",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "redux-immutable-crud-actions": "^1.0.0"
+  },
+  "peerDependencies": {
+    "redux-immutable-crud-actions": "^1.0.0"
   }
 }

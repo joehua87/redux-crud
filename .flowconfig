@@ -14,7 +14,7 @@
 ./flow-typed/npm/mocha_v2.4.x.js
 ./flow-typed/npm/redux-actions_v0.9.x.js
 ./flow-typed/modules.js.flow
-./packages/redux-crud-flowtype/index.js.flow
+./packages/redux-immutable-crud-flowtype/index.js.flow
 ./node_modules/immutable/dist/immutable.js.flow
 
 [options]

@@ -1,5 +1,5 @@
 {
-  "name": "redux-crud-flowtype",
+  "name": "redux-immutable-crud-flowtype",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
